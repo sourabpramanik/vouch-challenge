@@ -9,7 +9,7 @@ export default function HomeScreen(){
     const { isOpen, onOpen, onClose } = useDisclose()
 
     return(
-        <VStack w="full" flex={1} bg="warmGray.50">
+        <VStack w="full" flex={1} bg="white">
             <MastHead 
                 title="Your Protected Payments" 
                 subtitle="We are excied for you to protect your first payment!!" 

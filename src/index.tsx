@@ -1,6 +1,7 @@
 import React from 'react';
 import {StatusBar} from 'react-native'; 
 import HomeScreen from './screens/home';
+import SignUpPage from './screens/sign-up';
 import { createStackNavigator } from '@react-navigation/stack';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import SafeAreaView from 'react-native-safe-area-view';
@@ -17,6 +18,7 @@ const App = () =>{
                     headerShown: false,               
                 }}
                 >
+                    <Stack.Screen name="Sign Up" component={SignUpPage} />            
                     <Stack.Screen name="Home" component={HomeScreen} />            
                 </Stack.Navigator>
             </SafeAreaView>

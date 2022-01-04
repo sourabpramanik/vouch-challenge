@@ -1,5 +1,5 @@
 import React from 'react'
-import {Input, HStack, FormControl} from 'native-base'
+import {Input, HStack, FormControl, Text} from 'native-base'
 
 interface Props{
     labelName: string
@@ -19,11 +19,12 @@ const InputField = (props: Props)=>{
         flexDirection="column"        
         w="full" 
         px={4} 
-        py={2}>
-            <FormControl.Label fontSize="lg" color="black">{labelName}</FormControl.Label>
+        py={3}>
+            <Text fontSize="lg" color="dark.300" px="2" mb={1}>{labelName}</Text>
             <Input                        
             w="full"
             {...props}
+            px="4"
             fontSize="md"                              
             />
             
