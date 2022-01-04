@@ -13,14 +13,14 @@ export default function MastHead(props: Props){
 
     return(
         <VStack h="300px" pb={5}>
-            <Image position="absolute" left={0} right={0} bottom={0} w="full" h="300px" resizeMode="cover" source={image} alt="masthead image"/>
+            <Image position="absolute" left={0} right={0} bottom={-5} w="full" h="300px" resizeMode="cover" source={image} alt="masthead image"/>
             {children}
             <Box flex={1}/>
             <Center w="full">
-                <Text color="purple.700" p={2} fontSize="2xl" bold>
+                <Text color="purple.700" px={2} mb="4" fontSize="3xl" bold>
                     {title}
                 </Text>
-                <Text color="warmGray.500" px="16" mt="3" fontSize="md" textAlign="center">
+                <Text color="warmGray.500" px="16" mb="3" fontSize="lg" textAlign="center">
                     {subtitle}
                 </Text>
             </Center>
