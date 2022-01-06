@@ -2,6 +2,7 @@ import React from 'react';
 import {StatusBar} from 'react-native'; 
 import HomeScreen from './screens/home';
 import SignUpPage from './screens/sign-up';
+import Verify from './screens/verify';
 import { createStackNavigator } from '@react-navigation/stack';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import SafeAreaView from 'react-native-safe-area-view';
@@ -17,8 +18,11 @@ const App = () =>{
                 screenOptions={{
                     headerShown: false,               
                 }}
-                >
-                    <Stack.Screen name="Sign Up" component={SignUpPage} />            
+                >       
+                    <Stack.Group>
+                        <Stack.Screen name="Sign Up" component={SignUpPage} options={{animationEnabled: false}}/> 
+                        <Stack.Screen name="VerifyPage" component={Verify} options={{animationEnabled: false}}/>
+                    </Stack.Group>                                                        
                     <Stack.Screen name="Home" component={HomeScreen} />            
                 </Stack.Navigator>
             </SafeAreaView>

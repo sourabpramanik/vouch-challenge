@@ -3,10 +3,10 @@ import {VStack, Text, Center, FormControl, Stack, Box} from 'native-base';
 import InputField from '../components/input-field';
 import CustomButton from '../components/custom-button';
 import TextMastHead from '../components/text-masthead';
-import AnimatedModal from '../components/animated-modal';
 import { FirebaseRecaptchaVerifierModal, FirebaseRecaptchaBanner } from "expo-firebase-recaptcha";
 import { getAuth, PhoneAuthProvider, signInWithCredential } from 'firebase/auth';
 import { app, auth } from '../../firebase';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 const initialValue = {
     first_name: '',
@@ -18,40 +18,52 @@ const initialValue = {
     verificationId: '',
 }
 
-export default function SignUpPage(){
+export default function SignUpPage(props){
+    const { navigation } = props;
     
     // Hooks
     const [formState, setFormState] = useState(initialValue)
-    const [open, setOpen] = useState(false);
-    const [loading, setLoading] = useState(false);
-    
+    const [loading, setLoading] = useState(false);   
+
     // Firebase 
     const recaptchaVerifier = React.useRef(null);
     const firebaseConfig = app.length ? app.options : undefined;
 
     // Functions
-    const handleModalOverlay = () =>{
-        setOpen(prev => !prev)
-    }
-
     const handleGetOtp = async() =>{        
         try {
             setLoading(true)
-            const phoneProvider = new PhoneAuthProvider(auth);
-            const verificationId = await phoneProvider.verifyPhoneNumber(
-              formState.phone,
-              recaptchaVerifier.current
-            );
-            setFormState({...formState, verificationId: verificationId});            
+            // const phoneProvider = new PhoneAuthProvider(auth);
+            // const verificationId = await phoneProvider.verifyPhoneNumber(
+            //   formState.phone,
+            //   recaptchaVerifier.current
+            // );
+            // setFormState({...formState, verificationId: verificationId});
+            navigation.navigate('VerifyPage', {handleSignupConfirmation});      
+            setLoading(false)
+
         } catch (error) {
             setLoading(false)
             console.log(error);            
         }                
     }
     console.log(formState);
+    const handleSignupConfirmation = async(props)=>{
+        try {
+            // const credential = PhoneAuthProvider.credential(
+            //     formState.verificationId,
+            //     code
+            // );
+            // await signInWithCredential(auth, credential);
+            console.log(props);
+            
+        } catch (error) {
+            console.log(error);            
+        }
+    }
     
     return(
-        <VStack flex={1} space={2} bg="white">
+        <KeyboardAwareScrollView flex={1} space={2} bg="white">
             <TextMastHead title="Sign Up!"/>
             <VStack>
                 <FirebaseRecaptchaVerifierModal
@@ -119,16 +131,8 @@ export default function SignUpPage(){
                     >
                         Get OTP 
                     </CustomButton>
-                </FormControl>
-                <AnimatedModal
-                // formState={formState}
-                // setFormState={setFormState}
-                open={open}
-                handleModalOverlay={handleModalOverlay}
-                // handleSignupConfirmation={handleSignupConfirmation}
-                // confirmationLoading={confirmationLoading}
-                />
+                </FormControl>                
             </VStack>
-        </VStack>
+        </KeyboardAwareScrollView>
     )
 }
