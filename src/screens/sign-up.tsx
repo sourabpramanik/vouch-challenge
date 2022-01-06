@@ -18,13 +18,14 @@ export default function SignUpPage(props){
         firebaseConfig,
         verificationProp,
         handleGetOtp,
+        sending,
     } = useContext(UserContext);
 
     const handleNavigation = useCallback(()=>{
         handleGetOtp();
-        if(verificationProp){
-            navigation.navigate('VerifyPage');        
-        }
+        // if(verificationProp){
+        //     navigation.navigate('VerifyPage');        
+        // }
     });
 
     const attemptInvisibleVerification = false; 
@@ -89,7 +90,10 @@ export default function SignUpPage(props){
                             onChangeText={(value) => setFormState({ ...formState, referral: value })}                           
                         />                                                  
                         <CustomButton
-                        bg="purple.700"                        
+                        bg="purple.700"  
+                        isLoading={sending}
+                        loadingText="Sending OTP"
+                        loadingBg="purple.600:alpha.70"                      
                         borderRadius="100" 
                         py={3}                  
                         onPress={handleNavigation}

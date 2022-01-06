@@ -12,7 +12,8 @@ export default function Verify(props){
     const {
         formState,   
         setAuthCode,
-        handleSignupConfirmation
+        handleSignupConfirmation,
+        confirming,
     } = useContext(UserContext);
     
     const handleVerification = useCallback(()=>{
@@ -56,7 +57,7 @@ export default function Verify(props){
             <Center justifyContent="flex-end" h="400">
                 <CustomButton
                 bg="purple.700"
-                // isLoading={confirmationLoading}
+                isLoading={confirming}
                 loadingText="Verifying OTP"
                 loadingBg="purple.600:alpha.70"
                 borderRadius="100"

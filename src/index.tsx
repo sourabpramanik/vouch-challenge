@@ -11,17 +11,19 @@ import UserContext from './context/user';
 const Stack = createStackNavigator();
 
 const App = () =>{
-    const {authUser} = useContext(UserContext);
+    const {authUser, verificationProp, setConfirming} = useContext(UserContext);
 
     useEffect(()=>{
-        check();   
+        checkUser();   
     },[]);
 
-    function check() {
+    function checkUser() {
        if(!authUser){
            return
-       }       
+       }
+       setConfirming(false)       
     }; 
+
     return(
         <SafeAreaProvider>         
             <SafeAreaView flex={1}>
@@ -33,8 +35,11 @@ const App = () =>{
                 >       
                 {!authUser ? 
                     <Stack.Group>
-                        <Stack.Screen name="Sign Up" component={SignUpPage} options={{animationEnabled: false}}/> 
-                        <Stack.Screen name="VerifyPage" component={Verify} options={{animationEnabled: false}}/>
+                        {!verificationProp ?
+                            <Stack.Screen name="Sign Up" component={SignUpPage} options={{animationEnabled: false}}/>
+                            : 
+                            <Stack.Screen name="VerifyPage" component={Verify} options={{animationEnabled: false}}/>
+                        }                                                 
                     </Stack.Group>
                     :
                     <Stack.Screen name="Home" component={HomeScreen} />            

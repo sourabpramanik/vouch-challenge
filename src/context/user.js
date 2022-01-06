@@ -23,6 +23,8 @@ const UserProvider = (props) =>{
     const [verificationProp, setVerificationProp] = useState();
     const [authCode, setAuthCode] = useState('');
     const [authUser, setAuthUser] = useState(null);
+    const [sending, setSending] = useState(false);
+    const [confirming, setConfirming] = useState(false);
 
     // props
     const {first_name, last_name, username, email, phone, referral} = formState;
@@ -34,20 +36,24 @@ const UserProvider = (props) =>{
 
     // Functions
     const handleGetOtp = async() =>{               
-        try {           
+        try {     
+            setSending(true);      
             const phoneProvider = new PhoneAuthProvider(auth);
             const verificationId = await phoneProvider.verifyPhoneNumber(
               phone,
               recaptchaVerifier.current
             );           
             setVerificationProp(verificationId)
-        } catch (error) {           
+        } catch (error) {     
+            setSending(false);    
             console.log(error);            
         }                
     };
 
     const handleSignupConfirmation = async()=>{
-        try {            
+        try {    
+            setSending(false);        
+            setConfirming(true);
             const credential = PhoneAuthProvider.credential(
                 verificationProp,
                 authCode
@@ -56,7 +62,9 @@ const UserProvider = (props) =>{
             const user = auth.currentUser;
             setAuthUser(user);
             handleMetaData();
+            setFormState(initialValue);
         } catch (error) {
+            setConfirming(false)
             console.log(error);            
         }
     };
@@ -79,9 +87,12 @@ const UserProvider = (props) =>{
             firebaseConfig,
             verificationProp,
             handleGetOtp,
+            sending,
             authCode,
             setAuthCode,
             handleSignupConfirmation,
+            setConfirming,
+            confirming,
         }}>
             {children}
         </UserContext.Provider>
