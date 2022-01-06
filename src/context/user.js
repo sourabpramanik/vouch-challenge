@@ -1,6 +1,7 @@
 import React, {useState, useEffect, useCallback} from 'react';
 import { getAuth, PhoneAuthProvider, signInWithCredential } from 'firebase/auth';
-import { app, auth } from '../../firebase';
+import { app, auth, db } from '../../firebase';
+import { collection, addDoc } from 'firebase/firestore';
 
 // context API
 const UserContext = React.createContext();
@@ -17,7 +18,7 @@ const initialValue = {
 
 
 const UserProvider = (props) =>{
-    // hooks
+    // hooks    
     const [formState, setFormState] = useState(initialValue);
     const [verificationProp, setVerificationProp] = useState();
     const [authCode, setAuthCode] = useState('');
@@ -53,12 +54,20 @@ const UserProvider = (props) =>{
             );            
             await signInWithCredential(auth, credential); 
             const user = auth.currentUser;
-            setAuthUser(user)                                          
+            setAuthUser(user);
+            handleMetaData();
         } catch (error) {
             console.log(error);            
         }
     };
-    console.log(authUser);
+
+    // Firestore
+    const collectionRef = collection(db, "users");
+
+    const handleMetaData = async()=>{
+        await addDoc(collectionRef, {...formState});
+    };
+
     return(
         <UserContext.Provider value={{
             formState,
