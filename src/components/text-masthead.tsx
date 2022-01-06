@@ -8,7 +8,7 @@ interface Props{
 const TextMastHead = (props: Props) =>{
 
     return(
-        <VStack h="120px" pb={2}>
+        <VStack h="120px" pb={2} bg="white">
             <Box>
                 <Heading color="purple.700" pt={10} ml={4} size="3xl">
                     {props.title}

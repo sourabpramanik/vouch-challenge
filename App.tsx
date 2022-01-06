@@ -1,6 +1,7 @@
 import AppContainer from './src/components/app-container';
 import 'react-native-gesture-handler';
-import Navigator from './src/'
+import Navigator from './src/';
+import {UserProvider} from './src/context/user';
 import { WebView } from 'react-native-webview';
 import { LogBox } from 'react-native';
 import _ from 'lodash';
@@ -16,11 +17,11 @@ export default function App() {
   };
  
   return (
-    <>
+    <UserProvider>
       <AppContainer>      
         <Navigator/>    
       </AppContainer>     
-    </>
+    </UserProvider>
   );
 }
 

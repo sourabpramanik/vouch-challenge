@@ -1,27 +1,24 @@
-import React, {useState} from 'react'
+import React, {useState, useCallback, useContext} from 'react'
 import {StyleSheet} from 'react-native'
 import {VStack, HStack, Center, Text, FormControl, IconButton, Icon} from 'native-base'
 import CustomButton from '../components/custom-button'
 import OTPInputView from '@twotalltotems/react-native-otp-input';
 import { AntDesign } from '@expo/vector-icons';
-import { PhoneAuthProvider, signInWithCredential } from 'firebase/auth';
-// import { auth } from '../../firebase';
+import UserContext from '../context/user';
+
 
 export default function Verify(props){
-    const { navigation, route, auth } = props;
-    console.log(route);
-    const { handleSignupConfirmation } = route.params;
-
-    const [verificationCode, setVerificationCode] = useState('');
-    console.log(verificationCode);
+    const { navigation } = props;
+    const {
+        formState,   
+        setAuthCode,
+        handleSignupConfirmation
+    } = useContext(UserContext);
     
-    const handleSendOTP =()=>{
-        try {
-            handleSignupConfirmation(verificationCode)
-        } catch (error) {
-            console.log(error);            
-        }
-    }
+    const handleVerification = useCallback(()=>{
+        handleSignupConfirmation();
+    });
+
     return(
         <VStack flex={1} bg="white">
             <FormControl px={6}>
@@ -45,13 +42,13 @@ export default function Verify(props){
                         />
                     <Text fontSize="3xl" color="purple.700" bold>OTP Verfication</Text>
                 </FormControl.Label>
-                <Text fontSize={16} color="dark.500">Enter the OTP sent to <Text color="dark.50">{route.params.phoneNumber}</Text></Text>
+                <Text fontSize={16} color="dark.500">Enter the OTP sent to <Text color="dark.50">{formState.phone}</Text></Text>
                 <OTPInputView 
                     pinCount={6} 
                     style={styles.otpView}
                     codeInputFieldStyle={styles.underlineStyleBase}
                     onCodeFilled={value => {
-                       setVerificationCode(value)
+                       setAuthCode(value)
                     }}
                 />
                 <Text fontSize={16} color="dark.500">Don't receive the OTP? <Text color="red.600">RESEND OTP</Text></Text>                                                        
@@ -64,7 +61,7 @@ export default function Verify(props){
                 loadingBg="purple.600:alpha.70"
                 borderRadius="100"
                 py={3}
-                onPress={handleSendOTP}
+                onPress={handleVerification}
                 >
                     Verify & Proceed
                 </CustomButton>
