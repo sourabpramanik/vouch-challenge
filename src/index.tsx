@@ -26,7 +26,7 @@ const App = () =>{
 
     return(
         <SafeAreaProvider>         
-            <SafeAreaView flex={1}>
+            <SafeAreaView flex={1} pt="4">
                 <StatusBar barStyle="dark-content" backgroundColor="#00000000"/>
                 <Stack.Navigator
                 screenOptions={{

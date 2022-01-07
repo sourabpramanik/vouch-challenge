@@ -32,7 +32,7 @@ export default function HomeScreen(){
                 />
                 <CustomActionSheet isOpen={isOpen} onClose={onClose}/>
             </VStack>
-            <Fab
+            {/* <Fab
             position="absolute"
             renderInPortal={false}
             size='sm'
@@ -43,7 +43,7 @@ export default function HomeScreen(){
             // icon={<Icon color="white" as={<AntDesign name="plus"/>} size="sm"/>}
             bg="warmGray.200"  
             label="P"          
-            />
+            /> */}
             <VStack  h="200px">
                 
             </VStack>

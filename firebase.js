@@ -3,13 +3,12 @@ import { getAuth } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 
 const config = {
-  apiKey: "AIzaSyDcqkflIGIn60hnkClW7JhKkLBBVhhiuAw",
-  authDomain: "quickstart-1607022885703.firebaseapp.com",
-  projectId: "quickstart-1607022885703",
-  storageBucket: "quickstart-1607022885703.appspot.com",
-  messagingSenderId: "985223638703",
-  appId: "1:985223638703:web:69a5e6195952f38d6aee5a",
-  measurementId: "G-0C1GJRR84J"
+  apiKey: "AIzaSyBl4woGk5Q79_693bM3EMnJkhH_7XGI0B4",
+  authDomain: "vouch-challenge-58822.firebaseapp.com",
+  projectId: "vouch-challenge-58822",
+  storageBucket: "vouch-challenge-58822.appspot.com",
+  messagingSenderId: "446127467163",
+  appId: "1:446127467163:web:0d05c99a849d7020a7343e"
 };
 
 try {

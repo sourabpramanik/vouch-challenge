@@ -3,16 +3,17 @@ import {VStack, Text, Center, FormControl, Stack, Box} from 'native-base';
 import InputField from '../components/input-field';
 import CustomButton from '../components/custom-button';
 import TextMastHead from '../components/text-masthead';
+import ErrorAlert from '../components/error';
 import UserContext from '../context/user';
 import { FirebaseRecaptchaVerifierModal, FirebaseRecaptchaBanner } from "expo-firebase-recaptcha";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
-
 
 export default function SignUpPage(props){
     const { navigation } = props;
     const {
         formState, 
         setFormState, 
+        error,
         app,
         recaptchaVerifier,
         firebaseConfig,
@@ -30,8 +31,9 @@ export default function SignUpPage(props){
 
     const attemptInvisibleVerification = false; 
     return(
-        <VStack flex={1} space={2} bg="white">
-            <KeyboardAwareScrollView>
+        <VStack flex={1} space={2} bg="white">    
+            <KeyboardAwareScrollView>         
+                <ErrorAlert show={error}>* Marked Fields Are Required</ErrorAlert>        
                 <TextMastHead title="Sign Up!"/>
                 <VStack>
                     <FirebaseRecaptchaVerifierModal
@@ -43,15 +45,16 @@ export default function SignUpPage(props){
                         <InputField
                             placeholder="Enter your first name"
                             type="text"
-                            labelName="First Name"
+                            labelName="First Name*"
                             borderRadius="10"
                             value={formState.first_name}                            
                             onChangeText={(value) => setFormState({ ...formState, first_name: value })}
                         />
+                     
                         <InputField
                             placeholder="Enter your last name"
                             type="text"
-                            labelName="Last Name"
+                            labelName="Last Name*"
                             borderRadius="10"
                             value={formState.last_name}                            
                             onChangeText={(value) => setFormState({ ...formState, last_name: value })}
@@ -59,7 +62,7 @@ export default function SignUpPage(props){
                         <InputField
                             placeholder="Enter a unique username(max 20 char)"
                             type="text"
-                            labelName="Username"
+                            labelName="Username*"
                             borderRadius="10"
                             value={formState.username}                            
                             onChangeText={(value) => setFormState({ ...formState, username: value })}
@@ -67,7 +70,7 @@ export default function SignUpPage(props){
                         <InputField
                             placeholder="Enter your email id"
                             type="email"
-                            labelName="Email"
+                            labelName="Email*"
                             borderRadius="10"
                             value={formState.email}                            
                             onChangeText={(value) => setFormState({ ...formState, email: value })}
@@ -75,7 +78,7 @@ export default function SignUpPage(props){
                         <InputField
                             placeholder="For ex: +91 9898989898"
                             type="tel"
-                            labelName="Phone Number"
+                            labelName="Phone Number*"
                             keyboardType="phone-pad"
                             borderRadius="10"
                             value={formState.phone}                            

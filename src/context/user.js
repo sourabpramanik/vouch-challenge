@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useCallback} from 'react';
-import { getAuth, PhoneAuthProvider, signInWithCredential } from 'firebase/auth';
+import { PhoneAuthProvider, signInWithCredential, signInWithPhoneNumber } from 'firebase/auth';
 import { app, auth, db } from '../../firebase';
 import { collection, addDoc } from 'firebase/firestore';
 
@@ -50,6 +50,14 @@ const UserProvider = (props) =>{
         }                
     };
 
+    const handleResendOtp= async() =>{
+        try {
+                   
+            // no exact method found                       
+        } catch (error) {
+            console.log(error);
+        }
+    }
     const handleSignupConfirmation = async()=>{
         try {    
             setSending(false);        
@@ -90,6 +98,7 @@ const UserProvider = (props) =>{
             sending,
             authCode,
             setAuthCode,
+            handleResendOtp,
             handleSignupConfirmation,
             setConfirming,
             confirming,

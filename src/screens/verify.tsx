@@ -5,6 +5,7 @@ import CustomButton from '../components/custom-button'
 import OTPInputView from '@twotalltotems/react-native-otp-input';
 import { AntDesign } from '@expo/vector-icons';
 import UserContext from '../context/user';
+import ErrorAlert from '../components/error';
 
 
 export default function Verify(props){
@@ -12,6 +13,8 @@ export default function Verify(props){
     const {
         formState,   
         setAuthCode,
+        error,
+        handleResendOtp,
         handleSignupConfirmation,
         confirming,
     } = useContext(UserContext);
@@ -21,7 +24,8 @@ export default function Verify(props){
     });
 
     return(
-        <VStack flex={1} bg="white">
+        <VStack flex={1} bg="white" space={2} pt="8">
+            <ErrorAlert show={error}>Verification Failed. Please Try Again</ErrorAlert>
             <FormControl px={6}>
                 <FormControl.Label py={4} alignItems="center">
                         <IconButton
@@ -52,7 +56,7 @@ export default function Verify(props){
                        setAuthCode(value)
                     }}
                 />
-                <Text fontSize={16} color="dark.500">Don't receive the OTP? <Text color="red.600">RESEND OTP</Text></Text>                                                        
+                <Text fontSize={16} color="dark.500">Don't receive the OTP? <Text color="red.600" onPress={handleResendOtp}>RESEND OTP</Text></Text>                                                        
             </FormControl>
             <Center justifyContent="flex-end" h="400">
                 <CustomButton
