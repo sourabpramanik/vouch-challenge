@@ -71,6 +71,8 @@ const UserProvider = (props) =>{
             setAuthUser(user);
             handleMetaData();
             setFormState(initialValue);
+            setVerificationProp(null);
+            setAuthCode('');
         } catch (error) {
             setConfirming(false)
             console.log(error);            

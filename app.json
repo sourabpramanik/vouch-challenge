@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "vouch-challenge",
+    "name": "vouch challenge",
     "slug": "vouch-challenge",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -20,9 +20,11 @@
       "supportsTablet": true
     },
     "android": {
+      "package": "com.task.vouchchallenge",
+      "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
+        "backgroundColor": "#FFFFFF"        
       }
     },
     "web": {
